@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VoteBot India 🗳️ — Your Civic Education Assistant</title>
+  <meta name="description" content="VoteBot India is a friendly, non-partisan civic education chatbot helping Indian citizens understand the democratic process, voter registration, and election procedures." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="bot-avatar-small">🗳️</div>
+        <div class="sidebar-title">
+          <span class="brand">VoteBot India</span>
+          <span class="brand-sub">Civic Education AI</span>
+        </div>
+      </div>
+
+      <nav class="quick-actions">
+        <p class="section-label">Quick Topics</p>
+        <button class="quick-btn" data-action="eligibility">
+          <span class="q-icon">✅</span>
+          <span>Check Eligibility</span>
+        </button>
+        <button class="quick-btn" data-action="register">
+          <span class="q-icon">📋</span>
+          <span>Register to Vote</span>
+        </button>
+        <button class="quick-btn" data-action="voting-day">
+          <span class="q-icon">🏛️</span>
+          <span>Voting Day Guide</span>
+        </button>
+        <button class="quick-btn" data-action="timeline">
+          <span class="q-icon">📅</span>
+          <span>Election Timeline</span>
+        </button>
+        <button class="quick-btn" data-action="quiz">
+          <span class="q-icon">🧠</span>
+          <span>Take Quiz</span>
+        </button>
+        <button class="quick-btn" data-action="rights">
+          <span class="q-icon">⚖️</span>
+          <span>Rights & Rules</span>
+        </button>
+        <button class="quick-btn" data-action="myths">
+          <span class="q-icon">💡</span>
+          <span>Myth vs Fact</span>
+        </button>
+        <button class="quick-btn" data-action="checklist">
+          <span class="q-icon">📌</span>
+          <span>Voting Checklist</span>
+        </button>
+        <button class="quick-btn" data-action="booth">
+          <span class="q-icon">📍</span>
+          <span>Find My Booth</span>
+        </button>
+        <button class="quick-btn" data-action="hindi">
+          <span class="q-icon">🇮🇳</span>
+          <span>Hindi में बात करें</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p>Source: <a href="https://eci.gov.in" target="_blank">eci.gov.in</a></p>
+        <p>© 2026 VoteBot India</p>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <!-- Header -->
+      <header class="chat-header">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle sidebar">☰</button>
+        <div class="header-center">
+          <div class="pulse-dot"></div>
+          <span class="header-title">VoteBot India</span>
+          <span class="header-badge">🇮🇳 Civic AI</span>
+        </div>
+        <button class="lang-toggle" id="langToggle" title="Switch Language">हिं / EN</button>
+      </header>
+
+      <!-- Flag Stripe -->
+      <div class="tricolor-bar">
+        <div class="bar saffron"></div>
+        <div class="bar white"></div>
+        <div class="bar green"></div>
+      </div>
+
+      <!-- Messages Container -->
+      <div class="messages-container" id="messagesContainer">
+        <!-- Welcome message injected by JS -->
+      </div>
+
+      <!-- Quiz Panel (hidden by default) -->
+      <div class="quiz-panel" id="quizPanel" style="display:none;">
+        <div class="quiz-header">
+          <span class="quiz-title">🧠 Election Quiz</span>
+          <span class="quiz-progress" id="quizProgress">Question 1 of 5</span>
+        </div>
+        <div class="quiz-question" id="quizQuestion"></div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+        <button class="quiz-next-btn" id="quizNextBtn" style="display:none;">Next Question →</button>
+      </div>
+
+      <!-- Input Area -->
+      <div class="input-area">
+        <div class="input-wrapper">
+          <textarea
+            id="userInput"
+            class="user-input"
+            placeholder="Ask me anything about Indian elections... 🗳️"
+            rows="1"
+            maxlength="500"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" aria-label="Send message">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+        <div class="input-footer">
+          <span>Powered by ECI guidelines • Non-partisan • Educational only</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="bot.js"></script>
+</body>
+</html>
