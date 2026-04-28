@@ -5,6 +5,7 @@ const ui = {
   menuToggle: document.getElementById('menuToggle'),
   sidebar: document.getElementById('sidebar'),
   langToggle: document.getElementById('langToggle'),
+  themeToggle: document.getElementById('themeToggle'),
   quizPanel: document.getElementById('quizPanel'),
   quizQuestion: document.getElementById('quizQuestion'),
   quizOptions: document.getElementById('quizOptions'),
@@ -30,6 +31,7 @@ function init() {
   });
 
   ui.langToggle.addEventListener('click', toggleLanguage);
+  ui.themeToggle.addEventListener('click', toggleTheme);
 
   document.querySelectorAll('.quick-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -39,7 +41,22 @@ function init() {
     });
   });
 
+  // Load saved theme
+  const savedTheme = localStorage.getItem('votebot-theme');
+  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.body.classList.add('dark-mode');
+    ui.themeToggle.innerText = '☀️';
+  }
+
   showWelcomeMessage();
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  ui.themeToggle.innerText = isDark ? '☀️' : '🌙';
+  ui.themeToggle.title = isDark ? 'Toggle Light Mode' : 'Toggle Dark Mode';
+  localStorage.setItem('votebot-theme', isDark ? 'dark' : 'light');
 }
 
 function toggleLanguage() {
