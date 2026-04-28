@@ -63,11 +63,30 @@ function toggleLanguage() {
   isHindi = !isHindi;
   document.body.classList.toggle('hindi-mode', isHindi);
   
-  // Update sidebar button text
-  const hindiBtnText = document.querySelector('.quick-btn[data-action="hindi"] span:nth-child(2)');
-  if (hindiBtnText) {
-    hindiBtnText.innerText = isHindi ? "Switch to English" : "Hindi में बात करें";
-  }
+  // Update sidebar translations
+  const translations = {
+    'eligibility': { en: 'Check Eligibility', hi: 'पात्रता जांचें' },
+    'register': { en: 'Register to Vote', hi: 'पंजीकरण करें' },
+    'voting-day': { en: 'Voting Day Guide', hi: 'मतदान दिन गाइड' },
+    'timeline': { en: 'Election Timeline', hi: 'चुनाव समयरेखा' },
+    'quiz': { en: 'Take Quiz', hi: 'क्विज़ खेलें' },
+    'rights': { en: 'Rights & Rules', hi: 'अधिकार और नियम' },
+    'myths': { en: 'Myth vs Fact', hi: 'मिथक बनाम तथ्य' },
+    'checklist': { en: 'Voting Checklist', hi: 'वोटिंग चेकलिस्ट' },
+    'booth': { en: 'Find My Booth', hi: 'अपना बूथ खोजें' },
+    'hindi': { en: 'Hindi में बात करें', hi: 'Switch to English' }
+  };
+
+  document.querySelectorAll('.quick-btn').forEach(btn => {
+    const action = btn.dataset.action;
+    if (translations[action]) {
+      const textSpan = btn.querySelector('span:nth-child(2)');
+      if (textSpan) textSpan.innerText = isHindi ? translations[action].hi : translations[action].en;
+    }
+  });
+
+  const sectionLabel = document.querySelector('.section-label');
+  if (sectionLabel) sectionLabel.innerText = isHindi ? 'त्वरित विषय' : 'Quick Topics';
 
   // Update input placeholder
   if (ui.userInput) {
