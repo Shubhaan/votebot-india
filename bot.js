@@ -62,6 +62,18 @@ function toggleTheme() {
 function toggleLanguage() {
   isHindi = !isHindi;
   document.body.classList.toggle('hindi-mode', isHindi);
+  
+  // Update sidebar button text
+  const hindiBtnText = document.querySelector('.quick-btn[data-action="hindi"] span:nth-child(2)');
+  if (hindiBtnText) {
+    hindiBtnText.innerText = isHindi ? "Switch to English" : "Hindi में बात करें";
+  }
+
+  // Update input placeholder
+  if (ui.userInput) {
+    ui.userInput.placeholder = isHindi ? "भारतीय चुनावों के बारे में कुछ भी पूछें... 🗳️" : "Ask me anything about Indian elections... 🗳️";
+  }
+
   addBotMessage(isHindi 
     ? "नमस्ते! मैं वोटबॉट इंडिया हूँ। मैं चुनाव प्रक्रिया में आपकी मदद कैसे कर सकता हूँ? 🗳️" 
     : "Hello! I switched to English. How can I help you with the election process today? 🗳️");
