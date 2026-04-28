@@ -401,14 +401,13 @@ function handleQuickAction(action) {
   }
   else if (action === 'booth') {
     addBotMessage(isHindi ? `
-      <strong>अपना मतदान केंद्र कैसे खोजें:</strong><br>
-      आप <b>electoralsearch.eci.gov.in</b> पर जाकर अपना नाम या EPIC नंबर (वोटर आईडी नंबर) डालकर अपना मतदान केंद्र खोज सकते हैं।<br>
-      आप <b>Voter Helpline App</b> का भी उपयोग कर सकते हैं।
+      <strong>अपना मतदान केंद्र खोजें:</strong><br>
+      आप अपना नज़दीकी मतदान केंद्र खोजने के लिए नीचे दिए गए Google Map का उपयोग कर सकते हैं, या <b><a href="https://electoralsearch.eci.gov.in" target="_blank">electoralsearch.eci.gov.in</a></b> पर जा सकते हैं।<br><br>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d14008.114827184245!2d77.20653215!3d28.6295551!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1spolling%20booth%20near%20me!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="250" style="border:0; border-radius:12px; margin-top:10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Maps - Polling Booths"></iframe>
     ` : `
-      <strong>How to find your Polling Booth:</strong><br>
-      Visit <b><a href="https://electoralsearch.eci.gov.in" target="_blank">electoralsearch.eci.gov.in</a></b>.<br>
-      You can search for your booth using your EPIC number (Voter ID number) or your personal details.<br>
-      Alternatively, you can use the <b>Voter Helpline App</b>.
+      <strong>Find your Polling Booth:</strong><br>
+      You can use the Google Map below to search for polling booths near you, or visit the official <b><a href="https://electoralsearch.eci.gov.in" target="_blank">electoralsearch.eci.gov.in</a></b>.<br><br>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d14008.114827184245!2d77.20653215!3d28.6295551!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1spolling%20booth%20near%20me!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="250" style="border:0; border-radius:12px; margin-top:10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Maps - Polling Booths"></iframe>
     `);
   }
   else if (action === 'checklist') {
