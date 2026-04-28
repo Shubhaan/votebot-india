@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VoteBot India - Test Suite</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7fa; color: #333; padding: 20px; }
+    h1 { color: #0A1B6F; border-bottom: 2px solid #FF7722; padding-bottom: 10px; }
+    .test-suite { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    .test-result { padding: 10px; margin: 5px 0; border-radius: 4px; font-weight: 500; }
+    .pass { background: #d4edda; color: #155724; border-left: 5px solid #28a745; }
+    .fail { background: #f8d7da; color: #721c24; border-left: 5px solid #dc3545; }
+    .summary { font-size: 1.2rem; margin-top: 20px; padding: 15px; background: #e2e3e5; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>VoteBot India - Automated Test Suite 🧪</h1>
+  <p>Running unit tests for core logic, security, and data integrity.</p>
+  
+  <div class="test-suite" id="testOutput"></div>
+  <div class="summary" id="testSummary">Running tests...</div>
+
+  <!-- Load Bot Script in test mode -->
+  <script>
+    // Mock the DOM environment for bot.js
+    window.TEST_MODE = true;
+    document.body.innerHTML += `
+      <div id="messagesContainer"></div>
+      <input id="userInput" />
+      <button id="sendBtn"></button>
+      <button id="menuToggle"></button>
+      <div id="sidebar"></div>
+      <button id="langToggle"></button>
+      <button id="themeToggle"></button>
+      <div id="quizPanel"></div>
+      <div id="quizQuestion"></div>
+      <div id="quizOptions"></div>
+      <div id="quizFeedback"></div>
+      <button id="quizNextBtn"></button>
+      <div id="quizProgress"></div>
+      <div class="section-label"></div>
+    `;
+  </script>
+  <script src="bot.js"></script>
+  
+  <script>
+    // Test Runner
+    let passed = 0;
+    let failed = 0;
+    const output = document.getElementById('testOutput');
+
+    function assertEqual(testName, actual, expected) {
+      const div = document.createElement('div');
+      if (actual === expected) {
+        passed++;
+        div.className = 'test-result pass';
+        div.innerText = `✅ PASS: ${testName}`;
+      } else {
+        failed++;
+        div.className = 'test-result fail';
+        div.innerText = `❌ FAIL: ${testName}\n   Expected: ${expected}\n   Got: ${actual}`;
+      }
+      output.appendChild(div);
+    }
+
+    function runTests() {
+      // Test 1: Security - XSS Prevention
+      assertEqual('Security: escapeHTML sanitizes malicious script tags', 
+        escapeHTML('<script>alert("hack")</script>'), 
+        '&lt;script&gt;alert(&quot;hack&quot;)&lt;/script&gt;'
+      );
+
+      // Test 2: Security - escapeHTML handles complex attributes
+      assertEqual('Security: escapeHTML sanitizes quotes', 
+        escapeHTML('onload="alert(1)"'), 
+        'onload=&quot;alert(1)&quot;'
+      );
+
+      // Test 3: Quiz Data Integrity
+      assertEqual('Integrity: English Quiz has 5 questions', quizDataEn.length, 5);
+      assertEqual('Integrity: Hindi Quiz has 5 questions', quizDataHi.length, 5);
+      
+      // Test 4: Quiz Logic
+      assertEqual('Logic: Correct answer for English Q1 is index 1', quizDataEn[0].ans, 1);
+
+      // Test 5: State management (simulate checking language toggle)
+      const initialLang = isHindi;
+      toggleLanguage();
+      assertEqual('Logic: toggleLanguage switches isHindi state', isHindi, !initialLang);
+      
+      // Reset state
+      toggleLanguage();
+
+      document.getElementById('testSummary').innerHTML = `
+        <strong>Total Tests:</strong> ${passed + failed} <br>
+        <strong>Passed:</strong> ${passed} <br>
+        <strong>Failed:</strong> ${failed}
+      `;
+      if (failed === 0) {
+        document.getElementById('testSummary').style.backgroundColor = '#d4edda';
+        document.getElementById('testSummary').style.color = '#155724';
+      }
+    }
+
+    // Run tests after slight delay to ensure bot.js loaded
+    setTimeout(runTests, 200);
+  </script>
+</body>
+</html>
